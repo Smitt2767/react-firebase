@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import constants from "../../../constants";
 
 const initialState = {
-  projects: [],
+  completedProjects: [],
+  inProgressProjects: [],
+  notCompletedProjects: [],
 };
 
 const projectSlice = createSlice({
@@ -9,10 +12,25 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     setProjects: (state, action) => {
-      state.projects = action.payload;
+      if (action.payload.status === constants.todoStatus.notCompleted)
+        state.notCompletedProjects = [
+          ...state.notCompletedProjects,
+          ...action.payload.data,
+        ];
+      else if (action.payload.status === constants.todoStatus.completed)
+        state.completedProjects = [
+          ...state.completedProjects,
+          ...action.payload.data,
+        ];
+      else
+        state.inProgressProjects = [
+          ...state.inProgressProjects,
+          ...action.payload.data,
+        ];
     },
+    resetProjects: () => initialState,
   },
 });
 
-export const { setProjects } = projectSlice.actions;
+export const { setProjects, resetProjects } = projectSlice.actions;
 export default projectSlice.reducer;

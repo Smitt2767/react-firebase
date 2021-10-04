@@ -12,7 +12,7 @@ import variants from "../../constants/variants";
 
 const Button = ({ children, bgColor, onClick }) => (
   <button
-    className={`bg-${bgColor}-400 text-center p-2 rounded-full text-gray-100 hover:text-gray-50 hover:bg-${bgColor}-500`}
+    className={`bg-${bgColor}-400 text-center p-2 rounded-full text-gray-100 hover:text-gray-50 hover:bg-${bgColor}-600`}
     onClick={onClick}
   >
     {children}
@@ -22,7 +22,7 @@ const Button = ({ children, bgColor, onClick }) => (
 const Card = ({ data, onEdit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showCardInfo, setShowCardInfo] = useState(false);
+  const [showCardInfo, setShowCardInfo] = useState(true);
   const dragRef = useRef();
 
   const [{ isDragging }, drag] = useDrag({

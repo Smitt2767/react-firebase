@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import constants from "../../constants";
 import AddEditTodo from "./AddEditTodo";
 import Todo from "./Todo";
 import { useSelector, useDispatch } from "react-redux";
-import { getAll } from "../../services/projectsService";
-import { setProjects } from "./store/projectSlice";
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { AnimatePresence } from "framer-motion";
+import { resetProjects } from "./store/projectSlice";
+
 const Projects = () => {
   const [modal, setModal] = useState("");
   const [data, setData] = useState(null);
@@ -16,26 +16,16 @@ const Projects = () => {
     currentUser: { uid },
   } = useSelector((state) => state.auth);
 
-  const { projects } = useSelector((state) => state.project);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsub = getAll(uid).onSnapshot((snapshot) => {
-      dispatch(
-        setProjects(
-          snapshot.docs.map((project) => ({
-            id: project.id,
-            ...project.data(),
-            created_at: project.data().created_at.toDate(),
-            updated_at: project.data().updated_at.toDate(),
-          }))
-        )
-      );
-    });
+    return () => {
+      dispatch(resetProjects());
+    };
+  }, [dispatch]);
 
-    return unsub;
-  }, [uid, dispatch]);
+  const { completedProjects, notCompletedProjects, inProgressProjects } =
+    useSelector((state) => state.project);
 
   const handleAdd = (value) => {
     setModal(value);
@@ -71,31 +61,27 @@ const Projects = () => {
             <Todo
               title="To do"
               onAdd={handleAdd.bind(null, constants.todoStatus.notCompleted)}
-              data={projects.filter(
-                (item) => item.status === constants.todoStatus.notCompleted
-              )}
+              data={notCompletedProjects}
               onEdit={(data) =>
                 handleEdit(data, constants.todoStatus.notCompleted)
               }
               status={constants.todoStatus.notCompleted}
             />
+
             <Todo
               title="In Progress"
               onAdd={handleAdd.bind(null, constants.todoStatus.inProgress)}
-              data={projects.filter(
-                (item) => item.status === constants.todoStatus.inProgress
-              )}
+              data={inProgressProjects}
               onEdit={(data) =>
                 handleEdit(data, constants.todoStatus.inProgress)
               }
               status={constants.todoStatus.inProgress}
             />
+
             <Todo
               title="Completed"
               onAdd={handleAdd.bind(null, constants.todoStatus.completed)}
-              data={projects.filter(
-                (item) => item.status === constants.todoStatus.completed
-              )}
+              data={completedProjects}
               onEdit={(data) =>
                 handleEdit(data, constants.todoStatus.completed)
               }

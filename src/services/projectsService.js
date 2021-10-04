@@ -2,8 +2,13 @@ import { firestore } from "../config/firebase.config";
 
 const projects = firestore.collection("projects");
 
-export const getAll = (uid) =>
-  projects.where("user_id", "==", uid).orderBy("updated_at", "desc");
+export const getAll = (uid, status) =>
+  projects
+    .where("user_id", "==", uid)
+    .where("status", "==", status)
+    .orderBy("updated_at", "desc")
+
+    .limit(5);
 
 export const add = ({ uid, title, desc, status }) =>
   projects.add({
