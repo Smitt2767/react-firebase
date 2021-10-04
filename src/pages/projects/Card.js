@@ -12,7 +12,7 @@ import variants from "../../constants/variants";
 
 const Button = ({ children, bgColor, onClick }) => (
   <button
-    className={`bg-${bgColor}-500 text-center p-2 rounded-full text-gray-100 hover:text-gray-50 hover:bg-${bgColor}-600`}
+    className={`bg-${bgColor}-400 text-center p-2 rounded-full text-gray-100 hover:text-gray-50 hover:bg-${bgColor}-500`}
     onClick={onClick}
   >
     {children}
