@@ -9,6 +9,7 @@ import { setMessage } from "../../store/layoutSlice";
 import moment from "moment";
 import { AnimatePresence, motion } from "framer-motion";
 import variants from "../../constants/variants";
+
 const Button = ({ children, bgColor, onClick }) => (
   <button
     className={`bg-${bgColor}-500 text-center p-2 rounded-full text-gray-100 hover:text-gray-50 hover:bg-${bgColor}-600`}
@@ -93,8 +94,8 @@ const Card = ({ data, onEdit }) => {
           </Modal>
         )}
       </AnimatePresence>
-      <motion.div
-        variants={variants.listItem}
+
+      <div
         className={` shdow-2xl w-full rounded-lg p-4 flex flex-col mb-4 ${
           isDragging ? "bg-gray-100 bg-opacity-30" : "bg-white"
         } `}
@@ -139,7 +140,7 @@ const Card = ({ data, onEdit }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </>
   );
 };

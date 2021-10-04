@@ -53,7 +53,7 @@ const App = () => {
       }, 5000);
     }
     return () => clearTimeout(id);
-  }, [message]);
+  }, [message, dispatch]);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (user) => {

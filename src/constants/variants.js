@@ -50,10 +50,12 @@ const list = {
   },
 };
 
-export default {
+const variants = {
   modal,
   alert,
   accordion,
   listItem,
   list,
 };
+
+export default variants;

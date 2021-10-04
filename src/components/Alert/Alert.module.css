@@ -1,0 +1,24 @@
+.open {
+  animation: slide-up 0.3s ease-out;
+}
+.close {
+  animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100px);
+  }
+}

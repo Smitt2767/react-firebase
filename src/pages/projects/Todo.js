@@ -3,8 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Card from "./Card";
 import { useDrop } from "react-dnd";
 import { updateStatus } from "../../services/projectsService";
-import { motion } from "framer-motion";
-import variants from "../../constants/variants";
+
 const Todo = ({ title, data, onAdd, onEdit, status }) => {
   const dropRef = useRef();
 
@@ -40,20 +39,14 @@ const Todo = ({ title, data, onAdd, onEdit, status }) => {
       >
         <AiOutlinePlus />
       </button>
-      <motion.div
-        variants={variants.list}
-        initial="init"
-        animate="load"
-        className={`flex-grow gap-4 overflow-y-auto`}
-        ref={dropRef}
-      >
+      <div className={`flex-grow gap-4 overflow-y-auto`} ref={dropRef}>
         {isActive && (
           <div className="h-20 mb-4 bg-gray-200 shadow-lg rounded-lg w-full border-4 border-primary border-dashed"></div>
         )}
         {data.map((item) => (
           <Card key={item.id} data={item} onEdit={onEdit} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
