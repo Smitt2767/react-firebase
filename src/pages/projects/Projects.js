@@ -57,7 +57,7 @@ const Projects = () => {
           <h1 className="text-4xl">Projects</h1>
         </div>
         <DndProvider backend={HTML5Backend}>
-          <div className="flex gap-4 h-full">
+          <div className="flex gap-4 h-full w-full">
             <Todo
               title="To do"
               onAdd={handleAdd.bind(null, constants.todoStatus.notCompleted)}
@@ -72,6 +72,8 @@ const Projects = () => {
               title="In Progress"
               onAdd={handleAdd.bind(null, constants.todoStatus.inProgress)}
               data={inProgressProjects}
+              npm
+              start
               onEdit={(data) =>
                 handleEdit(data, constants.todoStatus.inProgress)
               }

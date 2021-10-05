@@ -22,7 +22,7 @@ const Button = ({ children, bgColor, onClick }) => (
 const Card = ({ data, onEdit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showCardInfo, setShowCardInfo] = useState(true);
+  const [showCardInfo, setShowCardInfo] = useState(false);
   const dragRef = useRef();
 
   const [{ isDragging }, drag] = useDrag({

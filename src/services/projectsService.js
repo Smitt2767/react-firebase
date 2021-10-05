@@ -7,7 +7,6 @@ export const getAll = (uid, status) =>
     .where("user_id", "==", uid)
     .where("status", "==", status)
     .orderBy("updated_at", "desc")
-
     .limit(5);
 
 export const add = ({ uid, title, desc, status }) =>
